@@ -17,7 +17,9 @@ routes.post('/',[AuthorizationMiddleware.verifyToken, AuthorizationMiddleware.ve
 
 routes.put('/edit/:id', ToDoListController.UpdateToDoList)
 
-routes.put('/delete/:id', ToDoListController.DeleteToDoList)
+routes.delete('/delete/:id', ToDoListController.DeleteToDoList)
+
+routes.delete('/delete', ToDoListController.DeleteAllTodoList)
 
 
 
