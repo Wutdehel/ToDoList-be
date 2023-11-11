@@ -2,13 +2,14 @@ const ToDoListModel = require('../models/scheme/ToDoList')
 
 async function ReadToDoList(req, res, next) {
     try {
-        let getDataToDoList = await ToDoListModel.find()
-        
+        const idLogin = req.tokenUser.data.id
+        let getDataToDoList = await ToDoListModel.find( {userId: idLogin} )
         res.status(200).send({
             message: "List Data",
             statusCode: 200,
             data: getDataToDoList
         })
+
     } catch (error) {
         console.log(error)
         res.status(400).send({
@@ -141,7 +142,7 @@ async function DeleteAllTodoList(req, res, next) {
         await ToDoListModel.deleteMany({}); 
         res.status(200).send({ 
             message: 'All items deleted successfully',
-            statusCode: 400
+            statusCode: 200
         });
       } catch (error) {
         console.error(error);

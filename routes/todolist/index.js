@@ -8,18 +8,19 @@ const ToDoListController = require('../../controllers/ToDoListControllers')
 // Middleware
 
 const AuthorizationMiddleware = require('../../middlewares/authorization/index')
+const ToDoListMiddleware = require('../../middlewares/todolist/index')
 
-routes.get('/', ToDoListController.ReadToDoList)
+routes.get('/', [AuthorizationMiddleware.verifyToken, AuthorizationMiddleware.verifyJWTToken ], ToDoListController.ReadToDoList)
 
-routes.get('/:id', ToDoListController.ReadDetailToDoList)
+routes.get('/:id', [AuthorizationMiddleware.verifyToken, AuthorizationMiddleware.verifyJWTToken ], ToDoListController.ReadDetailToDoList)
 
-routes.post('/',[AuthorizationMiddleware.verifyToken, AuthorizationMiddleware.verifyJWTToken ], ToDoListController.CreateToDoList)
+routes.post('/',[AuthorizationMiddleware.verifyToken, AuthorizationMiddleware.verifyJWTToken, ToDoListMiddleware.BodyValidaton ], ToDoListController.CreateToDoList)
 
-routes.put('/edit/:id', ToDoListController.UpdateToDoList)
+routes.put('/edit/:id',[AuthorizationMiddleware.verifyToken, AuthorizationMiddleware.verifyJWTToken], ToDoListController.UpdateToDoList)
 
-routes.delete('/delete/:id', ToDoListController.DeleteToDoList)
+routes.delete('/delete/:id', [AuthorizationMiddleware.verifyToken, AuthorizationMiddleware.verifyJWTToken ], ToDoListController.DeleteToDoList)
 
-routes.delete('/delete', ToDoListController.DeleteAllTodoList)
+routes.delete('/delete',[AuthorizationMiddleware.verifyToken, AuthorizationMiddleware.verifyJWTToken ], ToDoListController.DeleteAllTodoList)
 
 
 
