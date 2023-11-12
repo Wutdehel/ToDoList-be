@@ -20,7 +20,7 @@ routes.put('/edit/:id',[AuthorizationMiddleware.verifyToken, AuthorizationMiddle
 
 routes.delete('/delete/:id', [AuthorizationMiddleware.verifyToken, AuthorizationMiddleware.verifyJWTToken ], ToDoListController.DeleteToDoList)
 
-routes.delete('/delete',[AuthorizationMiddleware.verifyToken, AuthorizationMiddleware.verifyJWTToken ], ToDoListController.DeleteAllTodoList)
+routes.delete('/deleteall',[AuthorizationMiddleware.verifyToken, AuthorizationMiddleware.verifyJWTToken ], ToDoListController.DeleteAllTodoList)
 
 
 
